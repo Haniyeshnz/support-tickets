@@ -14,4 +14,8 @@ class ticket extends Model
     {
         return $this->belongsTo(category::class);
     }
+    public function label(): BelongsTo
+    {
+        return $this->belongsTo(label::class);
+    }
 }
