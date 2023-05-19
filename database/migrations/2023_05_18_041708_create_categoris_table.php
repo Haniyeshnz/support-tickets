@@ -27,12 +27,3 @@ return new class extends Migration
         Schema::dropIfExists('categoris');
     }
 };
-// $table->id();
-// $table->uuid('uuid')->nullable();
-// $table->foreignId('user_id');
-// $table->string('title');
-// $table->text('message');
-// $table->enum('priority',['high','medium','low'])->default('low');
-// $table->enum('status',['open','closed'])->default('open');
-// $table->foreignId('assigned_to');
-// $table->timestamps();
