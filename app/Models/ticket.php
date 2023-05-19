@@ -18,4 +18,8 @@ class ticket extends Model
     {
         return $this->belongsTo(label::class);
     }
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(user::class);
+    }
 }

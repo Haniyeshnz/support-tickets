@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('tickets', function (Blueprint $table) {
-            $table->unsignedBigInteger('label');
- 
-            $table->foreign('label')->references('id')->on('labels');
+            $table->unsignedBigInteger('assigned_to')->nullable()->references('id')->on('users')->after('is_locked');
+          
         });
     }
 
@@ -24,8 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('tickets', function (Blueprint $table) {
-            $table->dropForeign(['label']);
-            $table->dropColumn(['label']);
+            $table->dropColumn(['assigned_to']);
         });
     }
 };

@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('title');
             $table->text('message');
             $table->enum('priority',['high','medium','low'])->default('low');
-            $table->enum('status',['open','closed'])->default('open');
+            $table->boolean('is_resolved')->default(false);
+            $table->boolean('is_locked')->default(false);
             $table->timestamps();
         });
     }
