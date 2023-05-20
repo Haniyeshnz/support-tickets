@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('assets', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->string('path');
-            $table->rememberToken();
-            $table->timestamps();
+        Schema::table('tickets', function (Blueprint $table) {
+            $table->unsignedBigInteger('creator_id');
+ 
+            $table->foreign('creator_id')->references('id')->on('users');
         });
     }
 
@@ -26,6 +23,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('assetse');
+        Schema::table('tickets', function (Blueprint $table) {
+            $table->dropForeign(['creator_id']);
+            $table->dropColumn(['creator_id']);
+        });
     }
 };
