@@ -51,7 +51,7 @@ class User extends Authenticatable
    
     public function createdTickets(): HasMany
     {
-        return $this->hasMany(Ticket::class,'creator_id');
+        return $this->hasMany(Ticket::class,'creator');
     }
    
    

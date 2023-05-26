@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('tickets', function (Blueprint $table) {
-            $table->unsignedBigInteger('creator_id');
- 
-            $table->foreign('creator_id')->references('id')->on('users');
+        Schema::create('comments', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('ticket_id');
+            $table->text('message');
+            $table->string('repliable_type');
+            $table->bigInteger('repliable_id');
+            $table->timestamps();
         });
     }
 
@@ -23,9 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('tickets', function (Blueprint $table) {
-            $table->dropForeign(['creator_id']);
-            $table->dropColumn(['creator_id']);
-        });
+        Schema::dropIfExists('comments');
     }
 };
