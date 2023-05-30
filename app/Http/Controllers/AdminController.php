@@ -6,7 +6,14 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    // use AuthenticatesUsers;
+    // public function __construct(){
+    //     $this->middleware('guest:web');
+    //     // $this->middleware('guest:admin');
+    
+    // }
+   
     public function AdminDashboard(){
-        return view('admin.admin_dashboard');
+        return view('dashboard');
     }
 }

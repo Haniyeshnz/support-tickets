@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('creator');
             $table->string('title');
-            $table->text('message');
-            $table->text('asset');
+            $table->text('description');
+            $table->string('file_path')->nullable();
             $table->enum('priority',['high','medium','low'])->default('low');
-            $table->boolean('is_resolved')->default(false);
-            $table->boolean('is_locked')->default(false);
+            $table->tinyInteger('status')->comment('0:open , 1:replied , 2:closed');
+            $table->bigInteger('agent');
             $table->timestamps();
         });
     }

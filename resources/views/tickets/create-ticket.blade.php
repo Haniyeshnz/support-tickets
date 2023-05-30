@@ -12,7 +12,7 @@
     <div class="p-6 bg-gray-100 min-h-screen">
         <h1 class="mb-4 text-2xl">Create ticket</h1>
         <div class="card bg-white rounded-lg">
-            <form action="/tickets" method="POST" class="card-body p-4 flex flex-col gap-5">
+            <form action="{{route('ticket.new')}}" method="POST" class="card-body p-4 flex flex-col gap-5">
                 @csrf
                 <!-- START Title -->
                 <label class="form-label">

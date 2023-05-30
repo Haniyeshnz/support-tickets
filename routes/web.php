@@ -34,17 +34,20 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 
-Route::get('tickets', [TicketController::class, 'create']);
-Route::post('tickets', [TicketController::class, 'store']);
+// Admin Rout
+Route::middleware(['auth','role:admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
+}); //End Group Admin Middleware
+
+
+ //Agent Rout
+Route::middleware(['auth','role:agent'])->group(function () {
+    Route::get('/agent/dashboard', [AgentController::class, 'AgentDashboard'])->name('agent.dashboard');
+});
+//End Group Agent Middleware 
+
+//ticket Rout
+Route::get('tickets', [TicketController::class, 'new'])->name('ticket.new');
+Route::post('tickets', [TicketController::class, 'create'])->name('ticket.create');
 Route::get('tickets/{id}', [TicketController::class, 'show']);
 Route::delete('tickets/{id}', [TicketController::class, 'destroy']);
-// Admin Rout
-// Route::middleware(['auth','role:admin'])->group(function () {
-//     // Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
-// }); //End Group Admin Middleware
-
-
-// //Agent Rout
-// Route::middleware(['auth','role:agent'])->group(function () {
-//     // Route::get('/agent/dashboard', [AgentController::class, 'AgentDashboard'])->name('agent.dashboard');
-// });//End Group Agent Middleware 

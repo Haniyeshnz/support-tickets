@@ -49,10 +49,7 @@ class User extends Authenticatable
         return $this->hasMany(Ticket::class);
     }
    
-    public function createdTickets(): HasMany
-    {
-        return $this->hasMany(Ticket::class,'creator');
-    }
+    
    
    
    
