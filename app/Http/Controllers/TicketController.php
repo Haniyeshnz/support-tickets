@@ -6,7 +6,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Category;
 use App\Models\Label;
-use App\Models\Ticket;
+use App\Models\ticket;
 
 use Illuminate\Http\Request;
 
@@ -25,8 +25,19 @@ class TicketController extends Controller
 
     public function create(Request $request)
     {
-        auth()->user()->tickets()->create([
-
-        ]);
+        auth()->user()->createTicket()->create([
+           $request->all()+['file_path'=>$this->uploadFile($request)]
+            ]);
     }
+    private function uploadFile($request){
+        if ($request->file) {
+            $file = $request->file('file');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('uploads', $filename);
+            return($path);
+
+    }
+}
+    
+
 }

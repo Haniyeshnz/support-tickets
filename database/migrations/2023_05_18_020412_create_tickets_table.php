@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('creator');
+            $table->bigInteger('user_id');
             $table->string('title');
             $table->text('description');
             $table->string('file_path')->nullable();

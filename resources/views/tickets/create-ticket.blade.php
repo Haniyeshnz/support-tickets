@@ -79,7 +79,7 @@
                 <!-- START Priority -->
                 <label class="file-upload card form-label bg-base-300 py-9 text-center">
                     <span class="file-upload-text">Drag & Drop your file or Browse</span>
-                    <input name="asset" class="file-upload-input input input-sm input-bordered w-full" type="file" multiple>
+                    <input name="file" class="file-upload-input input input-sm input-bordered w-full" type="file" multiple>
                 </label>
                 <!-- END Priority -->
                 <div>

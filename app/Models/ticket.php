@@ -11,7 +11,7 @@ class Ticket extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'message', 'asset', 'priority', 'category_id','label_id'
+        'title', 'message', 'asset', 'priority', 'category_id','label_id','user_id'
     ];
 
     public function category(): BelongsTo
@@ -26,10 +26,10 @@ class Ticket extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function creator(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'creator');
-    }
+    // public function creator(): BelongsTo
+    // {
+    //     return $this->belongsTo(User::class, 'creator');
+    // }
     protected $casts = [
         'priority' => \App\Enums\PriorityEnum::class
     ];
