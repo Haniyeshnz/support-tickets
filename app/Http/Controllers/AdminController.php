@@ -13,7 +13,7 @@ class AdminController extends Controller
     
     // }
    
-    public function AdminDashboard(){
-        return view('dashboard');
+    public function getUsers(){
+        return view('admin.users');
     }
 }

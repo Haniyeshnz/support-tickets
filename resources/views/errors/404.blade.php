@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>admin panel    </h1>
+    <h1>404</h1>
 </body>
 </html>

@@ -9,10 +9,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Ticket extends Model
 {
     use HasFactory;
+    use HasFactory;
 
     protected $fillable = [
-        'title', 'message', 'asset', 'priority', 'category_id','label_id','user_id'
+        'title', 'description', 'file', 'priority', 'category_id','label_id','user_id'
     ];
+  
 
     public function category(): BelongsTo
     {
@@ -26,10 +28,10 @@ class Ticket extends Model
     {
         return $this->belongsTo(User::class);
     }
-    // public function creator(): BelongsTo
-    // {
-    //     return $this->belongsTo(User::class, 'creator');
-    // }
+    public function userId(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
     protected $casts = [
         'priority' => \App\Enums\PriorityEnum::class
     ];

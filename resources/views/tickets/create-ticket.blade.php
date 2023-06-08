@@ -12,19 +12,19 @@
     <div class="p-6 bg-gray-100 min-h-screen">
         <h1 class="mb-4 text-2xl">Create ticket</h1>
         <div class="card bg-white rounded-lg">
-            <form action="{{route('ticket.new')}}" method="POST" class="card-body p-4 flex flex-col gap-5">
+            <form action="{{route('ticket.new')}}" method="POST" class="card-body p-4 flex flex-col gap-5" >
                 @csrf
                 <!-- START Title -->
                 <label class="form-label">
-                    Title
-                    <input name="title" class="input input-sm input-bordered w-full">
+                    Tittle
+                    <input name="tittle" class="input input-sm input-bordered w-full">
                 </label>
                 <!-- END Title -->
 
                 <!-- START Description -->
                 <label class="form-label">
                     Description
-                    <textarea name="message" class="textarea textarea-sm textarea-bordered w-full" rows="3"></textarea>
+                    <textarea name="description" class="textarea textarea-sm textarea-bordered w-full" rows="3"></textarea>
                 </label>
                 <!-- END Description -->
 
@@ -79,7 +79,7 @@
                 <!-- START Priority -->
                 <label class="file-upload card form-label bg-base-300 py-9 text-center">
                     <span class="file-upload-text">Drag & Drop your file or Browse</span>
-                    <input name="file" class="file-upload-input input input-sm input-bordered w-full" type="file" multiple>
+                    <input name="file" class="file-upload-input input input-sm input-bordered w-full" type="file" >
                 </label>
                 <!-- END Priority -->
                 <div>

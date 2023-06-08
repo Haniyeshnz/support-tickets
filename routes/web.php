@@ -36,7 +36,7 @@ require __DIR__ . '/auth.php';
 
 // Admin Rout
 Route::middleware(['auth','role:admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
+    Route::get('/users', [AdminController::class, 'getUsers'])->name('admin.users');
 }); //End Group Admin Middleware
 
 
@@ -51,3 +51,9 @@ Route::get('tickets', [TicketController::class, 'new'])->name('ticket.new');
 Route::post('tickets', [TicketController::class, 'create'])->name('ticket.create');
 Route::get('tickets/{id}', [TicketController::class, 'show']);
 Route::delete('tickets/{id}', [TicketController::class, 'destroy']);
+
+
+
+Route::get('index', function () {
+    return view('index');
+});

@@ -2,42 +2,72 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Validator;
-use App\Models\Category;
-use App\Models\Label;
-use App\Models\ticket;
-
 use Illuminate\Http\Request;
+use App\Models\category;
+use App\Models\label;
+use App\Models\Ticket;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Controller;
+
 
 class TicketController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:web,admin');
-    }
+    /**
+     * Store a new blog post.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+
     public function new()
     {
-        $categories = Category::all();
+        $categories = category::all();
         $labels = Label::all();
         return view('tickets.create-ticket', compact('categories', 'labels'));
     }
-
     public function create(Request $request)
     {
-        auth()->user()->createTicket()->create([
-           $request->all()+['file_path'=>$this->uploadFile($request)]
-            ]);
-    }
-    private function uploadFile($request){
+        $ticket = new Ticket();
+        $ticket->tittle = $request->tittle;
+        $ticket->description = $request->description;
+        $ticket->label_id = $request->label_id;
+        $ticket->category_id = $request->category_id;
+        $ticket->priority = $request->priority;
+        $ticket->user_id = auth()->user()->id;
+        $ticket->save();
         if ($request->file) {
-            $file = $request->file('file');
-            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file = $request->file;
+            dd($file);
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension($file);
+
+
             $path = $file->storeAs('uploads', $filename);
-            return($path);
 
+            $ticket->tittle = $request->title;
+            $ticket->description = $request->description;
+            $ticket->label_id = $request->label_id;
+            $ticket->category_id = $request->category_id;
+            $ticket->priority = $request->priority;
+            $ticket->file_path = $path;
+            $ticket->save();
+        }
+        return view('index');
     }
-}
-    
+    public function file($filename)
+    {
+        $path = Storage::disk('public')->path('uploads/' . $filename);
 
+        if (!Storage::disk('public')->exists('uploads/' . $filename)) {
+            abort(404);
+        }
+
+        return response()->file($path);
+    }
+
+
+
+    public function show($id)
+    {
+        $ticket = Ticket::find($id);
+    }
 }

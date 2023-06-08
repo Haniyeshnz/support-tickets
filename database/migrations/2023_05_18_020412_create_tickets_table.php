@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
-            $table->string('title');
+            $table->string('tittle');
             $table->text('description');
             $table->string('file_path')->nullable();
             $table->enum('priority',['high','medium','low'])->default('low');
-            $table->tinyInteger('status')->comment('0:open , 1:replied , 2:closed');
-            $table->bigInteger('agent');
+            $table->enum('status',['0:open', '1:replied' , '2:closed'])->default('0:open');
+            $table->bigInteger('agent')->nullable();
             $table->timestamps();
         });
     }
