@@ -25,6 +25,11 @@ class TicketController extends Controller
         $labels = Label::all();
         return view('tickets.create-ticket', compact('categories', 'labels'));
     }
+    public function index()
+    {
+       
+        return view('tickets.index');
+    }
     public function create(Request $request)
     {
         $ticket = new Ticket();

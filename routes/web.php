@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TicketController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\LabelController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,26 +36,31 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 
-// Admin Rout
-Route::middleware(['auth','role:admin'])->group(function () {
+// Admin Route
+Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/users', [AdminController::class, 'getUsers'])->name('admin.users');
+
+
+    //categories Route
+    Route::get('categories', [CategoryController::class, 'index'])->name('category.index');
+
+    //categories Route
+    Route::get('labels', [LabelController::class, 'index'])->name('labels.index');
+    Route::delete('labels/{label}', [LabelController::class, 'destroy'])->name('labels.destroy');
+    Route::get('labels/{label}', [LabelController::class, 'edit'])->name('labels.edit');
+    Route::post('labels/{label}', [LabelController::class, 'update'])->name('labels.update');
 }); //End Group Admin Middleware
 
 
- //Agent Rout
-Route::middleware(['auth','role:agent'])->group(function () {
+//Agent Route
+Route::middleware(['auth', 'role:agent'])->group(function () {
     Route::get('/agent/dashboard', [AgentController::class, 'AgentDashboard'])->name('agent.dashboard');
 });
 //End Group Agent Middleware 
 
-//ticket Rout
-Route::get('tickets', [TicketController::class, 'new'])->name('ticket.new');
+//ticket Route
+Route::get('create/tickets', [TicketController::class, 'new'])->name('ticket.new');
+Route::get('tickets', [TicketController::class, 'index'])->name('ticket.index');
 Route::post('tickets', [TicketController::class, 'create'])->name('ticket.create');
 Route::get('tickets/{id}', [TicketController::class, 'show']);
 Route::delete('tickets/{id}', [TicketController::class, 'destroy']);
-
-
-
-Route::get('index', function () {
-    return view('index');
-});
