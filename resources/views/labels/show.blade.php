@@ -3,11 +3,14 @@
 @section ('content')
 <!--  Main Area-->
 <div class="mr-10">
-@if (session('alert'))
-    <div class="alert alert-success">
-        {{ session('alert') }}
+    @if (session('alert'))
+    <div class="alert alert-success mt-5">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>{{session('alert')}}</span>
     </div>
-@endif
+    @endif
     <h1 class="mt-10 mb-5 text-5xl font-bold"> Labels</h1>
     <div class="mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
 
@@ -19,7 +22,7 @@
                             Name
                         </th>
                         <th scope="col" class="px-5 py-3 bg-white border-b border-gray-200 text-black text-sm font-normal">
-                           slug
+                            slug
                         </th>
                         <th scope="col" class="px-5 py-3 bg-white border-b border-gray-200 text-black text-sm font-normal">
                             All Tickets
@@ -29,15 +32,15 @@
                         </th>
                     </tr>
                 </thead>
-                  <!--Start foreach user-->
+                <!--Start foreach user-->
                 <tbody>
-                @foreach ($labels as $label)
+                    @foreach ($labels as $label)
                     <tr>
-                    <td class="px-5 py-5 border-gray-200 bg-white text-lg  ">
+                        <td class="px-5 py-5 border-gray-200 bg-white text-lg  ">
                             <div class="flex items-center">
                                 <div class="mx-auto">
                                     <p class="text-gray-900 whitespace-nowrap ">
-                                    {{ $label->name }}
+                                        {{ $label->name }}
                                     </p>
                                 </div>
                             </div>
@@ -46,7 +49,7 @@
                             <div class="flex items-center">
                                 <div class="mx-auto">
                                     <p class="text-gray-900 whitespace-nowrap ">
-                                    {{ $label->slug }}
+                                        {{ $label->slug }}
                                     </p>
                                 </div>
                             </div>
@@ -54,30 +57,30 @@
                         <td class="px-5 py-5 border-gray-200 bg-white text-lg  ">
                             <div class="flex items-center">
                                 <div class="mx-auto ">
-                                <a href="#" class="  text-black flex    transition-colors duration-200 justify-center  hover:font-bold">
+                                    <a href="#" class="  text-black flex    transition-colors duration-200 justify-center  hover:font-bold">
                                         <span class="text-gray-900 whitespace-nowrap">{{$label->tickets_count}}</span>
                                     </a>
                                 </div>
                             </div>
                         </td>
-                        
+
                         <td class="px-5 py-5 border-gray-200 bg-white text-lg  ">
                             <div class="flex  justify-center items-center   ">
-                              
+
                                 <div class=" bg-red-500 rounded-lg w-8 h-6">
-                                    <form action="{{route('labels.destroy',$label)}}" method="POST" >
+                                    <form action="{{route('labels.destroy',$label)}}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                    <button  class=" font-normal text-white flex    transition-colors duration-200  hover:text-gray-500">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-6 mx-1 ">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                        </svg>
+                                        <button class=" font-normal text-white flex    transition-colors duration-200  hover:text-gray-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-6 mx-1 ">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                            </svg>
 
-                                    </button>
+                                        </button>
                                     </form>
                                 </div>
-                                
-                               
+
+
                                 <div class="ml-3 bg-sky-500 rounded-lg w-8 h-6 ">
                                     <a href="{{route('labels.edit',$label)}}" class=" font-normal text-white flex items-center   transition-colors duration-200 justify-start  hover:text-gray-500">
 
@@ -96,10 +99,20 @@
                     </tr>
                     @endforeach
                 </tbody>
-                  <!--End foreach user-->
+                <!--End foreach user-->
             </table>
         </div>
     </div>
+    <div class=" justify-center ">
+        <!-- <div class="join ">
+            <button class="join-item btn">«</button>
+            <button class="join-item btn">Page 22</button>
+            <button class="join-item btn">»</button>
+        </div>
+    </div> -->
+    <div class="container">
+    {{ $labels->links() }}
+</div>
 </div>
 
 

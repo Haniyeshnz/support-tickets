@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Ticket extends Model
 {
     use HasFactory;
-    use HasFactory;
+    
 
     protected $fillable = [
         'title', 'description', 'file', 'priority', 'category_id','label_id','user_id'

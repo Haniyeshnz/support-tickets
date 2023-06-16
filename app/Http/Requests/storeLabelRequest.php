@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\support\Str;
 
 class storeLabelRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class storeLabelRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,5 +26,10 @@ class storeLabelRequest extends FormRequest
             'name'=>['required','unique:labels,name'],
             'slug'=>['required','unique:labels,slug'],
         ];
+    }
+    protected function prepareForValidation(){
+        $this->merge([
+            'slug'=>str::slug($this->slug),
+        ]);
     }
 }

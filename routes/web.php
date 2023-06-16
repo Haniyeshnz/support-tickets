@@ -42,10 +42,15 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 
     //categories Route
-    Route::get('categories', [CategoryController::class, 'index'])->name('category.index');
+    Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+    Route::get('categories/{category}', [CategoryController::class, 'edit'])->name('categories.edit');
+    Route::post('categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
 
-    //categories Route
+    //Labels Route
     Route::get('labels', [LabelController::class, 'index'])->name('labels.index');
+    Route::get('labels/create', [LabelController::class, 'create'])->name('labels.create');
+    Route::post('labels', [LabelController::class, 'store'])->name('labels.store');
     Route::delete('labels/{label}', [LabelController::class, 'destroy'])->name('labels.destroy');
     Route::get('labels/{label}', [LabelController::class, 'edit'])->name('labels.edit');
     Route::post('labels/{label}', [LabelController::class, 'update'])->name('labels.update');
